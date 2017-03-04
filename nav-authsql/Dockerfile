@@ -42,6 +42,8 @@ COPY content "c:/install/content"
 WORKDIR C:\\install\\content
 
 # Install NAV prerequisites and NAV default instance (will be stopped and disabled).
+RUN powershell Start-Process -Wait -FilePath 'C:\install\content\DynamicsNavDvd\Prerequisite Components\Microsoft Visual Studio 2010 Tools For Office Redist\vstor_redist.exe' -ArgumentList "/qs", "/q"
+
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\Prerequisite Components\Microsoft Report Viewer\SQLSysClrTypes.msi'
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\Prerequisite Components\Microsoft SQL Server Management Objects\SQLSysClrTypes.msi'
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\Prerequisite Components\Microsoft SQL Server Management Objects\SharedManagementObjects.msi'
@@ -49,6 +51,9 @@ RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\Prerequisite Components\Microsoft SQL Server\ReportBuilder3.msi'
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\Prerequisite Components\Microsoft SQL Server\sqlncli64.msi'
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\Prerequisite Components\IIS URL Rewrite Module\rewrite_2.0_rtw_x64.msi'
+
+RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\RoleTailoredClient\Microsoft Dynamics NAV RoleTailored Client.msi'
+
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-ServiceTier.ps1 -SERVERINSTANCE "DynamicsNAV"
 
 # Expose the default NAV ports.
