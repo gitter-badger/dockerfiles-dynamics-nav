@@ -56,6 +56,9 @@ RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-
 
 RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-ServiceTier.ps1 -SERVERINSTANCE "DynamicsNAV"
 
+RUN powershell Start-Process -Wait -FilePath 'C:\install\content\DynamicsNavDvd\WebClientDependencyInstaller.exe' -ArgumentList "/qs", "/q"
+RUN powershell -executionpolicy RemoteSigned c:\install\content\scripts\Install-Msi.ps1 'C:\install\content\DynamicsNavDvd\WebClient\Microsoft Dynamics NAV Web Client.msi'
+
 # Expose the default NAV ports.
 EXPOSE 80 7045 7046 7047 7048
 
